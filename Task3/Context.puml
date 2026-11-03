@@ -1,0 +1,25 @@
+@startuml
+!ROUNDED_STYLE=1
+!include <C4/C4_Context>
+
+title Контекст: сервисы для собственников PropDevelopment
+
+Person(owner, "Собственник", "Пользуется мобильным приложением")
+
+System(owners_system, "Система для собственников", "ЖКУ, ремонт, умный дом (домофон и шлагбаум)")
+System(bi_system, "Система сбора и обработки аналитической информации", "DWH Greenplum")
+
+Rel(owner, owners_system, "Оплачивает ЖКУ, открывает дверь и шлагбаум, даёт согласие на биометрию", "HTTPS")
+Rel(owners_system, bi_system, "Передача данных", "CDC")
+
+System_Ext(partner, "Платформа интеллектуальных устройств", "Распознавание лиц и номеров, управление домофонами и шлагбаумами")
+System_Ext(payment_system, "Платёжная система", "Онлайн-платежи за ЖКУ")
+System_Ext(management_companies, "Поставщики ресурсов ЖКХ", "Системы управляющих компаний")
+
+Rel(owners_system, partner, "Команды, выдача и отзыв биометрии и номеров", "HTTPS, REST")
+Rel(partner, owners_system, "События устройств (колбэки)", "HTTPS, подпись запроса")
+Rel(owners_system, payment_system, "Платежи за ЖКУ")
+Rel(owners_system, management_companies, "Получает данные по дому", "REST")
+
+footer PlantUML v.%version(), C4-PlantUML v.C4Version()
+@enduml
