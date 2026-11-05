@@ -1,0 +1,104 @@
+[
+  {
+    "category": "permission-probe",
+    "time": "2026-11-05T21:29:56.348633Z",
+    "user": "minikube-user",
+    "impersonated": "system:serviceaccount:secure-ops:monitoring",
+    "verb": "create",
+    "resource": "selfsubjectaccessreviews",
+    "subresource": null,
+    "namespace": null,
+    "name": null,
+    "code": 201,
+    "userAgent": "kubectl/v1.37.0 (darwin/arm64) kubernetes/f54c212",
+    "sourceIPs": [
+      "192.168.49.1"
+    ],
+    "auditID": "2eca28a0-7a1e-4227-87df-33f998a0d6f6"
+  },
+  {
+    "category": "secrets-access",
+    "time": "2026-11-05T21:29:56.386767Z",
+    "user": "minikube-user",
+    "impersonated": null,
+    "verb": "list",
+    "resource": "secrets",
+    "subresource": null,
+    "namespace": "kube-system",
+    "name": null,
+    "code": 200,
+    "userAgent": "kubectl/v1.37.0 (darwin/arm64) kubernetes/f54c212",
+    "sourceIPs": [
+      "192.168.49.1"
+    ],
+    "auditID": "7a4dc7bb-f6f2-4694-a34d-b8c07f1be0dd"
+  },
+  {
+    "category": "secrets-access",
+    "time": "2026-11-05T21:29:56.425432Z",
+    "user": "minikube-user",
+    "impersonated": "system:serviceaccount:secure-ops:monitoring",
+    "verb": "list",
+    "resource": "secrets",
+    "subresource": null,
+    "namespace": "kube-system",
+    "name": null,
+    "code": 403,
+    "userAgent": "kubectl/v1.37.0 (darwin/arm64) kubernetes/f54c212",
+    "sourceIPs": [
+      "192.168.49.1"
+    ],
+    "auditID": "082a540b-f599-41ee-9e85-a638c08ad468"
+  },
+  {
+    "category": "privileged-pod",
+    "time": "2026-11-05T21:29:56.487196Z",
+    "user": "minikube-user",
+    "impersonated": null,
+    "verb": "create",
+    "resource": "pods",
+    "subresource": null,
+    "namespace": "secure-ops",
+    "name": "privileged-pod",
+    "code": 201,
+    "userAgent": "kubectl/v1.37.0 (darwin/arm64) kubernetes/f54c212",
+    "sourceIPs": [
+      "192.168.49.1"
+    ],
+    "auditID": "466aa91a-0d3c-4dbf-9e74-901f53872eee"
+  },
+  {
+    "category": "pod-exec",
+    "time": "2026-11-05T21:29:56.605767Z",
+    "user": "minikube-user",
+    "impersonated": null,
+    "verb": "get",
+    "resource": "pods",
+    "subresource": "exec",
+    "namespace": "kube-system",
+    "name": "coredns-559f6c778d-fw7f4",
+    "code": 101,
+    "userAgent": "kubectl/v1.37.0 (darwin/arm64) kubernetes/f54c212",
+    "sourceIPs": [
+      "192.168.49.1"
+    ],
+    "auditID": "a9da1762-fbe7-4332-99b6-26e524f97811"
+  },
+  {
+    "category": "rbac-binding-change",
+    "time": "2026-11-05T21:29:56.683985Z",
+    "user": "minikube-user",
+    "impersonated": null,
+    "verb": "create",
+    "resource": "rolebindings",
+    "subresource": null,
+    "namespace": "secure-ops",
+    "name": "escalate-binding",
+    "code": 201,
+    "userAgent": "kubectl/v1.37.0 (darwin/arm64) kubernetes/f54c212",
+    "sourceIPs": [
+      "192.168.49.1"
+    ],
+    "auditID": "e05dc629-fd8d-4023-a100-20d1ae70528b"
+  }
+]
