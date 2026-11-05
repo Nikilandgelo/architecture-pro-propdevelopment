@@ -15,6 +15,7 @@ if [ -z "$CA_DATA" ]; then
     CA_DATA=$(base64 < "$CA_FILE" | tr -d '\n')
 fi
 
+
 OUTPUT_FILE="./test/rbac-test-kubeconfig.yaml"
 echo "==> Генерация ключей и CSR для пользователей..."
 
