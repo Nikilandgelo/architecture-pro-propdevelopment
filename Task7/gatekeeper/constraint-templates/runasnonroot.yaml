@@ -1,0 +1,38 @@
+apiVersion: templates.gatekeeper.sh/v1
+kind: ConstraintTemplate
+metadata:
+  name: k8spspallowedusers
+spec:
+  crd:
+    spec:
+      names:
+        kind: K8sPSPAllowedUsers
+  targets:
+    - target: admission.k8s.gatekeeper.sh
+      rego: |
+        package k8spspallowedusers
+
+        violation[{"msg": msg}] {
+            c := input_containers[_]
+            not effective_non_root(c)
+            msg := sprintf("Container %v must run with runAsNonRoot: true", [c.name])
+        }
+        violation[{"msg": msg}] {
+            c := input_containers[_]
+            c.securityContext.runAsUser == 0
+            msg := sprintf("Container %v must not run as UID 0", [c.name])
+        }
+        violation[{"msg": msg}] {
+            input.review.object.spec.securityContext.runAsUser == 0
+            msg := "Pod must not run as UID 0"
+        }
+
+        input_containers[c] { c := input.review.object.spec.containers[_] }
+        input_containers[c] { c := input.review.object.spec.initContainers[_] }
+
+        container_sets_it(c) { c.securityContext.runAsNonRoot != null }
+        effective_non_root(c) { c.securityContext.runAsNonRoot == true }
+        effective_non_root(c) {
+            not container_sets_it(c)
+            input.review.object.spec.securityContext.runAsNonRoot == true
+        }
