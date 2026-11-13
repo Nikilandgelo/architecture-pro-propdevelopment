@@ -1,0 +1,9 @@
+apiVersion: certificates.k8s.io/v1
+kind: CertificateSigningRequest
+metadata:
+  name: PLACEHOLDER_NAME
+spec:
+  request: PLACEHOLDER_REQUEST
+  signerName: kubernetes.io/kube-apiserver-client
+  usages:
+    - client auth
